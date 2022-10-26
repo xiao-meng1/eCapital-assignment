@@ -1,0 +1,55 @@
+.app {
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: whitesmoke;
+}
+
+.container {
+  background-color: white;
+  padding: 30px;
+}
+
+.h1 {
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+th, td {
+  padding: 20px 80px 20px 0;
+  font-weight: 900;
+  text-align: start;
+}
+
+td:last-child {
+  padding: 20px 0;
+}
+
+.table-headers {
+  color: rgb(133, 133, 133);
+  border-bottom: solid lightgray 1px;
+}
+
+tr.last {
+  border-bottom: solid lightgray 1px;
+}
+
+td.buttons button {
+  margin: 0 10px;
+}
+
+button.edit {
+  color: orange;
+}
+
+button.delete {
+  color: red;
+}
+
+button.add-employee {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: lightgreen;
+}
