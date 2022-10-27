@@ -7,7 +7,7 @@
     "devstart": "DEBUG=bug-tracker:* nodemon -L ./bin/www"
   },
   "prisma": {
-  "seed": "node prisma/seed.js"
+    "seed": "node prisma/seed.js"
   },
   "dependencies": {
     "@prisma/client": "^4.5.0",
