@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 export default function AddEmployeePopup(props) {
   const { unmountPopup } = props;
-  const [firstNameVal, setFirstNameVal] = useState();
-  const [lastNameVal, setLastNameVal] = useState();
-  const [salaryVal, setSalaryVal] = useState();
+  const [firstNameVal, setFirstNameVal] = useState('');
+  const [lastNameVal, setLastNameVal] = useState('');
+  const [salaryVal, setSalaryVal] = useState('');
 
   const handleAddEmployeeClick = async (e) => {
     e.preventDefault();
+
+    (async () => {
+      const uri = `${process.env.REACT_APP_BACKEND_ORIGIN}/users`;
+      const data = {
+        firstName: firstNameVal,
+        lastName: lastNameVal,
+        salary: salaryVal,
+      };
+
+      await axios.post(uri, data);
+    })();
+
     unmountPopup();
   };
 
