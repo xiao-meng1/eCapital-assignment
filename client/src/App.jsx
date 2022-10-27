@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import AddEmployeePopup from './components/AddEmployeePopup';
 import EditEmployeePopup from './components/EditEmployeePopup';
+import TableRow from './components/TableRow';
 
 import './app.css';
 
@@ -17,6 +18,7 @@ function App() {
   const toggleAddEmployeePopupIsActive = () => {
     setAddEmployeePopupIsActive(!addEmployeePopupIsActive);
   };
+
   const toggleEditEmployeePopupIsActive = () => {
     setEditEmployeePopupIsActive(!editEmployeePopupIsActive);
   };
@@ -45,26 +47,15 @@ function App() {
                 <th>Salary</th>
               </tr>
               {employees.map((employee) => (
-                <tr key={String(employee.id)}>
-                  <td>{employee.firstName}</td>
-                  <td>{employee.lastName}</td>
-                  <td>{`$${employee.salary.toLocaleString()}`}</td>
-                  <td className="buttons">
-                    <button
-                      type="button"
-                      className="edit"
-                      onClick={() => {
-                        setActiveEmployeeId(employee.id);
-                        setEditEmployeePopupIsActive(true);
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button type="button" className="delete">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
+                <TableRow
+                  key={String(employee.id)}
+                  id={String(employee.id)}
+                  firstName={employee.firstName}
+                  lastName={employee.lastName}
+                  salary={employee.salary}
+                  setActiveEmployeeId={setActiveEmployeeId}
+                  setEditEmployeePopupIsActive={setEditEmployeePopupIsActive}
+                />
               ))}
               <tr className="last">
                 <td />
@@ -92,16 +83,19 @@ function App() {
           unmountPopup={toggleEditEmployeePopupIsActive}
           id={activeEmployeeId}
           firstName={
-            employees.find((employee) => employee.id === activeEmployeeId)
-              .firstName
+            employees.find(
+              (employee) => String(employee.id) === activeEmployeeId
+            ).firstName
           }
           lastName={
-            employees.find((employee) => employee.id === activeEmployeeId)
-              .lastName
+            employees.find(
+              (employee) => String(employee.id) === activeEmployeeId
+            ).lastName
           }
           salary={
-            employees.find((employee) => employee.id === activeEmployeeId)
-              .salary
+            employees.find(
+              (employee) => String(employee.id) === activeEmployeeId
+            ).salary
           }
         />
       ) : null}

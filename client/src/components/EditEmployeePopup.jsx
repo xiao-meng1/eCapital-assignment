@@ -90,7 +90,7 @@ export default function EditEmployeePopup(props) {
 
 EditEmployeePopup.defaultProps = {
   unmountPopup: () => {},
-  id: null,
+  id: '',
   firstName: '',
   lastName: '',
   salary: null,
@@ -98,7 +98,7 @@ EditEmployeePopup.defaultProps = {
 
 EditEmployeePopup.propTypes = {
   unmountPopup: PropTypes.func,
-  id: PropTypes.number,
+  id: PropTypes.string,
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   salary: PropTypes.number,
