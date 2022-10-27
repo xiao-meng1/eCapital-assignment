@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import AddEmployeePopup from './components/AddEmployeePopup';
 import EditEmployeePopup from './components/EditEmployeePopup';
@@ -11,26 +12,7 @@ function App() {
   const [editEmployeePopupIsActive, setEditEmployeePopupIsActive] =
     useState(false);
   const [activeEmployeeId, setActiveEmployeeId] = useState(null);
-  const [employees] = useState([
-    {
-      id: 1,
-      firstName: 'Ian',
-      lastName: 'Malcolm',
-      salary: 70000,
-    },
-    {
-      id: 2,
-      firstName: 'John',
-      lastName: 'Hammond',
-      salary: 89600,
-    },
-    {
-      id: 3,
-      firstName: 'Ray',
-      lastName: 'Arnold',
-      salary: 45000,
-    },
-  ]);
+  const [employees, setEmployees] = useState([]);
 
   const toggleAddEmployeePopupIsActive = () => {
     setAddEmployeePopupIsActive(!addEmployeePopupIsActive);
@@ -38,6 +20,15 @@ function App() {
   const toggleEditEmployeePopupIsActive = () => {
     setEditEmployeePopupIsActive(!editEmployeePopupIsActive);
   };
+
+  useEffect(() => {
+    (async () => {
+      const uri = `${process.env.REACT_APP_BACKEND_ORIGIN}/users`;
+      const response = await axios.get(uri);
+
+      setEmployees(response.data);
+    })();
+  });
 
   return (
     <div className="app">
