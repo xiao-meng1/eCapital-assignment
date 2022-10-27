@@ -11,7 +11,7 @@ function App() {
     useState(false);
   const [editEmployeePopupIsActive, setEditEmployeePopupIsActive] =
     useState(false);
-  const [activeEmployeeId, setActiveEmployeeId] = useState(null);
+  const [activeEmployeeId, setActiveEmployeeId] = useState('');
   const [employees, setEmployees] = useState([]);
 
   const toggleAddEmployeePopupIsActive = () => {

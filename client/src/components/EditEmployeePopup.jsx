@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 export default function EditEmployeePopup(props) {
-  const { unmountPopup, firstName, lastName, salary } = props;
+  const { unmountPopup, id, firstName, lastName, salary } = props;
   const [firstNameVal, setFirstNameVal] = useState(firstName);
   const [lastNameVal, setLastNameVal] = useState(lastName);
   const [salaryVal, setSalaryVal] = useState(salary);
 
   const handleEditEmployeeClick = async (e) => {
     e.preventDefault();
+
+    (async () => {
+      const uri = `${process.env.REACT_APP_BACKEND_ORIGIN}/users/${id}`;
+      const data = {
+        firstName: firstNameVal,
+        lastName: lastNameVal,
+        salary: salaryVal,
+      };
+
+      await axios.put(uri, data);
+    })();
+
     unmountPopup();
   };
 
@@ -57,6 +70,8 @@ export default function EditEmployeePopup(props) {
                 type="text"
                 id="salary"
                 name="salary"
+                pattern="[0-9]*"
+                title="Please enter a number"
                 value={salaryVal}
                 onChange={(e) => {
                   setSalaryVal(e.target.value);
@@ -75,6 +90,7 @@ export default function EditEmployeePopup(props) {
 
 EditEmployeePopup.defaultProps = {
   unmountPopup: () => {},
+  id: null,
   firstName: '',
   lastName: '',
   salary: null,
@@ -82,6 +98,7 @@ EditEmployeePopup.defaultProps = {
 
 EditEmployeePopup.propTypes = {
   unmountPopup: PropTypes.func,
+  id: PropTypes.number,
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   salary: PropTypes.number,

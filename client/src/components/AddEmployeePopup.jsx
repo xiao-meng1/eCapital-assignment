@@ -70,6 +70,8 @@ export default function AddEmployeePopup(props) {
                 type="text"
                 id="salary"
                 name="salary"
+                pattern="[0-9]*"
+                title="Please enter a number"
                 value={salaryVal}
                 onChange={(e) => {
                   setSalaryVal(e.target.value);
